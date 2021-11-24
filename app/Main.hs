@@ -1,6 +1,6 @@
 module Main (main) where
 
--- import AoC2021Haskell (someFunc)
+import Day1 (day1a, day1b)
 --import qualified Data.Text as T
 
 f :: Text -> Text
