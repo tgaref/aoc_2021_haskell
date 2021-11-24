@@ -21,3 +21,5 @@ cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
+/AoC2021-Haskell.cabal~
+/getinput~
