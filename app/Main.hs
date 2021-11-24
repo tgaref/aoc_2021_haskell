@@ -8,5 +8,5 @@ f s = s <> "!!!"
 
 main :: IO ()
 main = do
-  input <- readFileText "inputs/1.input"
+  let input = "aaa\nbbb\nccc"
   traverse_ (putTextLn . f) $ lines input

@@ -52,7 +52,7 @@ common common-options
 library
   import:              common-options
   hs-source-dirs:      src
-  exposed-modules:     AoC2021Haskell
+  exposed-modules:     Day1
 
 executable aoc21
   import:              common-options
