@@ -1,6 +1,6 @@
 module Main (main) where
 
-import Day1 (day1a, day1b)
+--import Day1 (day1a, day1b)
 --import qualified Data.Text as T
 
 f :: Text -> Text
