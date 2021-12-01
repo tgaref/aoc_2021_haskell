@@ -1,4 +1,4 @@
 #!/usr/bin/fish
 
 source .cookie
-curl -o inputs/$argv[1].input -b $AOC_COOKIE https://adventofcode.com/2020/day/$argv[1]/input
+curl -o inputs/$argv[1].input -b $AOC_COOKIE https://adventofcode.com/2021/day/$argv[1]/input

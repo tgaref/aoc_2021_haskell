@@ -6,13 +6,6 @@ Maintainer: Theo Garefalakis <tgaref@gmail.com>
 AoC 2021 solutions using Haskell
 -}
 
-module Day1
-       ( day1a
-       , day1b
+module Lib
+       ( 
        ) where
-
-
-
-day1a = undefined
-
-day1b = undefined

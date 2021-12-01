@@ -23,4 +23,6 @@ cabal.project.local~
 .ghc.environment.*
 /AoC2021-Haskell.cabal~
 /getinput~
-/src/Day1.hs~
+/src/*.hs~
+/app/*.hs~
+/inputs/*.*~
