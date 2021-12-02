@@ -75,3 +75,9 @@ executable day1
   main-is:             Day1.hs
   build-depends:       AoC2021-Haskell
 
+executable day2
+  import:              common-options
+  hs-source-dirs:      app
+  main-is:             Day2.hs
+  build-depends:       AoC2021-Haskell
+
