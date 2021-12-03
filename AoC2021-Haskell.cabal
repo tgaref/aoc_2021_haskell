@@ -26,6 +26,7 @@ common common-options
                      , memory
                      , bytestring
                      , hashable
+                     , vector
   
   mixins:              base hiding (Prelude)
                      , relude (Relude as Prelude)
@@ -81,3 +82,8 @@ executable day2
   main-is:             Day2.hs
   build-depends:       AoC2021-Haskell
 
+executable day3
+  import:              common-options
+  hs-source-dirs:      app
+  main-is:             Day3.hs
+  build-depends:       AoC2021-Haskell
