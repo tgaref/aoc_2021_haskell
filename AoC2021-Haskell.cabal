@@ -36,6 +36,7 @@ common common-options
                        -Widentities
                        -Wincomplete-uni-patterns
                        -Wincomplete-record-updates
+                       -Wno-name-shadowing
                        -threaded
                        -rtsopts
                        -with-rtsopts=-N
@@ -86,4 +87,10 @@ executable day3
   import:              common-options
   hs-source-dirs:      app
   main-is:             Day3.hs
+  build-depends:       AoC2021-Haskell
+
+executable day4
+  import:              common-options
+  hs-source-dirs:      app
+  main-is:             Day4.hs
   build-depends:       AoC2021-Haskell
