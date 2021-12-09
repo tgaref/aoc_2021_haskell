@@ -46,7 +46,7 @@ day9a :: Grid Int -> Int
 day9a grid = sum $ sum <$> imap2 (\i j _ -> if isLow grid (C i j) then 1 + cell grid (C i j) else 0) grid  
 
 day9b :: Grid Int -> Int
-day9b grid = product . take 3 . sortOn Down . fmap (S.size . basin grid) $ lowPoints
+day9b grid = product . take 3 . sortBy (comparing Down) . fmap (S.size . basin grid) $ lowPoints
   where
     lowPoints = V.ifoldl' (\acc j row ->
                              V.ifoldl' (\acc' i _ -> if isLow grid (C i j) then C i j : acc' else acc') acc row) [] grid 
