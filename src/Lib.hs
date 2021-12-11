@@ -29,7 +29,7 @@ map2 f = V.map (V.map f)
 
 imap2 :: (Int -> Int -> a -> b) -> Grid a -> Grid b 
 imap2 f = V.imap (\j row -> V.imap (\i v -> f i j v) row)
-  
+
 readInt :: Text -> Int
 readInt t = case T.decimal t of
   Left _       -> error "Failed to read int"
