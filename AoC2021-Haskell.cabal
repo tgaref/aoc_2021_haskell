@@ -27,6 +27,7 @@ common common-options
                      , bytestring
                      , hashable
                      , vector
+                     , extra
   
   mixins:              base hiding (Prelude)
                      , relude (Relude as Prelude)
@@ -141,4 +142,10 @@ executable day12
   import:              common-options
   hs-source-dirs:      app
   main-is:             Day12.hs
+  build-depends:       AoC2021-Haskell
+
+executable day13
+  import:              common-options
+  hs-source-dirs:      app
+  main-is:             Day13.hs
   build-depends:       AoC2021-Haskell
