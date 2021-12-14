@@ -3,7 +3,8 @@ module Main (main) where
 import qualified Data.Text as T
 import           Data.Map.Strict ((!))
 import qualified Data.Map.Strict as M
-import qualified Data.Set as S 
+import qualified Data.Set as S
+-- import           Debug.Trace (trace)
 
 type Cave = Text
 type Graph = Map Cave [Cave]
@@ -28,33 +29,35 @@ parseLine t = (a, T.drop 1 b)
 -- Solution
 
 dfs1 :: Graph -> Cave -> Cave -> [Path]
-dfs1 g start end = go [start]
+dfs1 g start end = go S.empty [start]
   where
     smallCaves = S.filter (T.all (\c -> 'a' <= c && c <= 'z'))  $ M.keysSet g
-    notBlocked path cave =
-      not (cave `S.member` smallCaves) || (cave `notElem` path)
-    go :: Path -> [Path]
-    go []            = error "Not possible!"
-    go path@(cave:rest) 
+    blocked _  "start" = True
+    blocked sv cv      = cv `S.member` sv
+    go :: Set Cave -> Path -> [Path]
+    go _            []            = error "Not possible!"
+    go smallVisited path@(cave:_)
        | cave == end = [path]
        | otherwise   = let neighbours = g ! cave
-                           neighbours' = filter (notBlocked rest) neighbours 
-                       in mconcat $ go . (:path) <$> neighbours'
+                           neighbours' = filter (not . blocked smallVisited) neighbours
+                           smallVisited' = if cave `S.member` smallCaves then S.insert cave smallVisited else smallVisited
+                       in mconcat $ go smallVisited' . (:path) <$> neighbours'
+
 dfs2 :: Graph -> Cave -> Cave -> [Path]
-dfs2 g start end = go [start]
+dfs2 g start end = go S.empty False [start]
   where
     smallCaves = S.filter (T.all (\c -> 'a' <= c && c <= 'z'))  $ M.keysSet g
-    blocked _    "start" = True
-    blocked path cave    =
-      let path' = filter (`S.member` smallCaves) $ cave:path 
-      in (cave `S.member` smallCaves) && length (ordNub path') <= length path' - 2
-    go :: Path -> [Path]
-    go []            = error "Not possible!"
-    go path@(cave:_) 
+    blocked _  _ "start" = True
+    blocked sv r cv      = (cv `S.member` sv) && r
+    go :: Set Cave -> Bool -> Path -> [Path]
+    go _            _   []            = error "Not possible!"
+    go smallVisited rep path@(cave:_)
        | cave == end = [path]
        | otherwise   = let neighbours = g ! cave
-                           neighbours' = filter (not . blocked path) neighbours 
-                       in mconcat $ go . (:path) <$> neighbours'
+                           rep' = rep || cave `S.member` smallVisited 
+                           neighbours' = filter (not . blocked smallVisited rep') neighbours
+                           smallVisited' = if cave `S.member` smallCaves then S.insert cave smallVisited else smallVisited
+                       in mconcat $ go smallVisited' rep' . (:path) <$> neighbours'
 
 
 day12a :: Graph -> Int 
