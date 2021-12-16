@@ -28,6 +28,7 @@ common common-options
                      , hashable
                      , vector
                      , extra
+                     , PSQueue
   
   mixins:              base hiding (Prelude)
                      , relude (Relude as Prelude)
@@ -41,7 +42,7 @@ common common-options
                        -threaded
                        -rtsopts
                        -with-rtsopts=-N
-                       -O2
+                       -O3
   if impl(ghc >= 8.0)
     ghc-options:       -Wredundant-constraints
   if impl(ghc >= 8.2)
@@ -154,4 +155,10 @@ executable day14
   import:              common-options
   hs-source-dirs:      app
   main-is:             Day14.hs
+  build-depends:       AoC2021-Haskell
+
+executable day15
+  import:              common-options
+  hs-source-dirs:      app
+  main-is:             Day15.hs
   build-depends:       AoC2021-Haskell
