@@ -162,3 +162,9 @@ executable day15
   hs-source-dirs:      app
   main-is:             Day15.hs
   build-depends:       AoC2021-Haskell
+
+executable day16
+  import:              common-options
+  hs-source-dirs:      app
+  main-is:             Day16.hs
+  build-depends:       AoC2021-Haskell
