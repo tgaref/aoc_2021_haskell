@@ -16,7 +16,9 @@ import qualified Data.Vector as V
 
 type Grid a = Vector (Vector a)
 data Coords =  C {-# UNPACK #-} !Int {-# UNPACK #-} !Int
-  deriving stock (Eq, Ord, Show)
+  deriving stock (Eq, Ord, Show, Generic)
+
+instance Hashable Coords
 
 cell :: Grid a -> Coords -> a
 cell grid (C i j) = (grid ! j) ! i

@@ -3,9 +3,10 @@ module Main (main) where
 import           Lib (Coords (..), gridSize)
 import qualified Data.Text as T
 import qualified Data.Vector as V
-import qualified Data.Set as S
+import           Data.HashSet (HashSet)
+import qualified Data.HashSet as S
 
-type Surface = (Int, Int, (Set Coords, Set Coords, Set Coords))
+type Surface = (Int, Int, (HashSet Coords, HashSet Coords, HashSet Coords))
 
 -- Read input
 
@@ -27,11 +28,11 @@ stepEast :: Surface -> Surface
 stepEast (x,y,(east, south, empty)) = (x,y,(east', south, empty'))
   where
     (east', empty') = S.foldl' (\(ea, em) (C i j) ->
-                        let next = C ((i+1) `mod` x) j
-                        in if next `S.member` empty
-                           then (S.insert next ea, S.insert (C i j) (S.delete next em))
-                           else (S.insert (C i j) ea, em)
-                     ) (S.empty, empty) east 
+                                         let next = C ((i+1) `mod` x) j
+                                         in if next `S.member` empty
+                                         then (S.insert next ea, S.insert (C i j) (S.delete next em))
+                                         else (S.insert (C i j) ea, em)
+                                      ) (S.empty, empty) east 
 
 stepSouth :: Surface -> Surface
 stepSouth (x,y,(east, south, empty)) = (x,y,(east, south', empty'))
@@ -47,7 +48,7 @@ simulate :: Surface -> Int
 simulate = go 1
   where
     go !k surface
-      | surface' == surface = k
+      | surface == surface' = k
       | otherwise           = go (k+1) surface'
       where
         surface' = stepSouth . stepEast $ surface
