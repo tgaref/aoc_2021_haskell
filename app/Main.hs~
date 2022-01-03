@@ -1,8 +1,0 @@
-module Main where
-
-import AoC2021Haskell (someFunc)
-
-
-
-main :: IO ()
-main = interact show
